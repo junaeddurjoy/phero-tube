@@ -10,31 +10,55 @@
 </head>
 
 <body>
-    <main class="p-10">
-        <a href="index.html"><button class="btn btn-error text-white mx-20 md:mx-48 lg:mx-40 my-5 md:my-5 lg:my-0 w-40">Go Back</button></a>
+    <main class="p-10 text-center">
+        <a href="index.html"><button
+                class="btn btn-error text-white mx-20 md:mx-48 lg:mx-40 my-5 md:my-5 lg:my-0 w-40">Go Back</button></a>
         <!-- ques1 -->
-        <p class="font-bold text-2xl">
-            Discuss the scope of var, let, and const.
-        </p>
-        <p>
-            <p><span class="font-bold text-lg">Var:</span> Var is varibale which is to define a variable type which can be an integer, string or any kind of variable.</p>
-            <p><span class="font-bold text-lg">Let:</span> Let is to declare a variable which can be modified andreuse if needed. Also, let can be refered multiple and the main variable does not affect if therefered variable has been changed or modified.</p>
-            <p><span class="font-bold text-lg">Const:</span> Const also uses to declare variable which also canbe modified and reuse. But, unlike let it changes when a refered variable is changed.</p>
-        </p>
-        <!-- ques2 -->
-        <p class="font-bold text-2xl">
-            Tell us the use cases of null and undefined.
-        </p>
-        <p>
-            Undefined means a variable has been declared, but value has not assigned. Whereas, Null means empty value or a blank value. Null can be used when a value is absent or does not needed and for reseting a value.
-        </p>
-        <!-- ques3 -->
-        <p class="font-bold text-2xl">
-            What do you mean by REST API?
-        </p>
-        <p>
-            An application program interface (API) that uses HTTP requests to access and use data is known as a RESTful API. This information can be used to read, update, create, and delete actions involving resources. It can also be used to GET, PUT, POST, and DELETE data kinds.
-        </p>
+        <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 pl-0 md:pl-32 lg:pl-0">
+            <!-- ques1 -->
+            <div class="card w-96 bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">Discuss the scope of var, let, and const.</h2>
+                    <p>
+                        <span class="font-bold text-lg">Var:</span> Var is varibale which is to define a variable type
+                        which can
+                        be an integer, string or any kind of variable.
+                    </p>
+                    <p><span class="font-bold text-lg">Let:</span> Let is to declare a variable which can be modified
+                        andreuse
+                        if needed. Also, let can be refered multiple and the main variable does not affect if therefered
+                        variable has been changed or modified.</p>
+                    <p><span class="font-bold text-lg">Const:</span> Const also uses to declare variable which also
+                        canbe
+                        modified and reuse. But, unlike let it changes when a refered variable is changed.</p>
+                    </p>
+                    </p>
+                </div>
+            </div>
+            <!-- ques2 -->
+            <div class="card w-96 bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">Tell us the use cases of null and undefined.</h2>
+                    <p>
+                        Undefined means a variable has been declared, but value has not assigned. Whereas, Null means
+                        empty
+                        value or a blank value. Null can be used when a value is absent or does not needed and for
+                        reseting a
+                        value.
+                    </p>
+                </div>
+            </div>
+            <!-- ques3 -->
+            <div class="card w-96 bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">What do you mean by REST API?</h2>
+                    <p>
+                        An application program interface (API) that uses HTTP requests to access and use data is known
+                        as a RESTful API. This information can be used to read, update, create, and delete actions involving resources. It can also be used to GET, PUT, POST, and DELETE data kinds.
+                    </p>
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 

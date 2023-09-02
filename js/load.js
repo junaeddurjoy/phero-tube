@@ -2,43 +2,41 @@ const loadPhero = async (cat_id = 1000) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${cat_id}`);
     const data = await res.json();
     const pheroes = data.data;
-    // console.log(pheroes)
     displayPheroes(pheroes);
-    document.getElementById("sort-view").onclick = function() {sortPheroes(pheroes);};
+    const pher = JSON.stringify(pheroes);
+    document.getElementById("sort-view").onclick = function() {sortPheroes(pher);};
 }
 loadPhero();
 
-function sortPheroes(pheroes){
+function sortPheroes(pheroesobj){
+    let pheroes = JSON.parse(`${pheroesobj}`);
     let arr = [];
     let sortedArray = [];
     
     for(phero of pheroes){
-        arr.push(`${phero?.others.views}`.slice(0,-1));
+        let gg = phero.others.views;
+        arr.push(gg.slice(0,-1));
     }
     arr = arr.sort(function (a, b) {  return b - a;  });
-
-    if(`${pheroes[1].others.views}`.includes(arr[0]) == true){
-        console.log('done done done')
-    }
-
     for(let i=0; i<arr.length;i++){
         for(let j=0; j<arr.length;j++){
-            if(`${pheroes[j].others.views}`.includes(arr[i],0) == true){
-                sortedArray.push(`${pheroes[j]}`);
-                if(sortedArray.includes(`${pheroes[j].others.views}`,0) == true){
+            if(pheroes[j].others.views.includes(arr[i],0) == true){
+                if(sortedArray.includes(pheroes[j].title,0) == true){
                 }
                 else{
-                    sortedArray.push(`${pheroes[j]}`);
+                    sortedArray.push(pheroes[j]);
                 }
             }
         }
     }
-    console.log(sortedArray);
+    let sortArray = removeDuplicates(sortedArray);
+    displayPheroes(sortArray);
 }
 
-// loadPhero();
+function removeDuplicates(arr) {
+    return arr.filter((item,index) => arr.indexOf(item) === index);
+}
 const displayPheroes = pheroes =>{
-    // sortPheroes(pheroes);
     const pheroContainer = document.getElementById('phero-container');
     pheroContainer.textContent = ' ';
 
@@ -54,8 +52,6 @@ const displayPheroes = pheroes =>{
     else{
         pheroContainer.classList = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pl-12 md:pl-7 lg:pl-7';
         pheroes?.forEach(phero =>{
-            // console.log(phero);
-
             const pheroCard = document.createElement('div');
             pheroCard.classList = 'card w-80 p-4 shadow-xl my-5';
 
@@ -131,7 +127,7 @@ const displayCategories = categories => {
         const menuContainer = document.getElementById('menu-bar');
         const menuItem = document.createElement('div');
         menuItem.innerHTML = `
-            <button onclick="loadPhero(${categories[i].category_id})" id="menu-button" class="btn btn-secondary w-36">${categories[i].category}</button>
+            <button onclick="loadPhero(${categories[i].category_id})" id="menu-button" class="btn btn-secondary w-36 bg-gray-200 text-black hover:bg-gray-300 border-gray-200 hover:border-gray-300">${categories[i].category}</button>
             `;
         menuContainer.appendChild(menuItem);
     }
