@@ -25,11 +25,11 @@ function sortPheroes(pheroes){
         for(let j=0; j<arr.length;j++){
             if(`${pheroes[j].others.views}`.includes(arr[i],0) == true){
                 sortedArray.push(`${pheroes[j]}`);
-                // if(sortedArray.includes(`${pheroes[j].others.views}`,0) == true){
-                // }
-                // else{
-                //     sortedArray.push(`${pheroes[j]}`);
-                // }
+                if(sortedArray.includes(`${pheroes[j].others.views}`,0) == true){
+                }
+                else{
+                    sortedArray.push(`${pheroes[j]}`);
+                }
             }
         }
     }
