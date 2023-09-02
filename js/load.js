@@ -1,13 +1,44 @@
-// window.location.reload();
-const loadPhero = async (cat_id) => {
+const loadPhero = async (cat_id = 1000) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${cat_id}`);
     const data = await res.json();
     const pheroes = data.data;
     // console.log(pheroes)
     displayPheroes(pheroes);
+    document.getElementById("sort-view").onclick = function() {sortPheroes(pheroes);};
 }
+loadPhero();
+
+function sortPheroes(pheroes){
+    let arr = [];
+    let sortedArray = [];
+    
+    for(phero of pheroes){
+        arr.push(`${phero?.others.views}`.slice(0,-1));
+    }
+    arr = arr.sort(function (a, b) {  return b - a;  });
+
+    if(`${pheroes[1].others.views}`.includes(arr[0]) == true){
+        console.log('done done done')
+    }
+
+    for(let i=0; i<arr.length;i++){
+        for(let j=0; j<arr.length;j++){
+            if(`${pheroes[j].others.views}`.includes(arr[i],0) == true){
+                sortedArray.push(`${pheroes[j]}`);
+                // if(sortedArray.includes(`${pheroes[j].others.views}`,0) == true){
+                // }
+                // else{
+                //     sortedArray.push(`${pheroes[j]}`);
+                // }
+            }
+        }
+    }
+    console.log(sortedArray);
+}
+
 // loadPhero();
 const displayPheroes = pheroes =>{
+    // sortPheroes(pheroes);
     const pheroContainer = document.getElementById('phero-container');
     pheroContainer.textContent = ' ';
 
@@ -38,14 +69,15 @@ const displayPheroes = pheroes =>{
                 <div class="pt-5">
                     <div id="verified_logo" class="flex gap-2">
                         <img class="rounded-full h-8 w-8" src="${phero.authors[0].profile_picture}">
-                        <h2 class="card-title">${phero.title}
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0,0,256,256">
-                        <g fill="#5c7cfa" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(10.66667,10.66667)"><path d="M12,2c-5.5,0 -10,4.5 -10,10c0,5.5 4.5,10 10,10c5.5,0 10,-4.5 10,-10c0,-5.5 -4.5,-10 -10,-10zM17.7,9.7l-7,7c-0.2,0.2 -0.4,0.3 -0.7,0.3c-0.3,0 -0.5,-0.1 -0.7,-0.3l-3,-3c-0.4,-0.4 -0.4,-1 0,-1.4c0.4,-0.4 1,-0.4 1.4,0l2.3,2.3l6.3,-6.3c0.4,-0.4 1,-0.4 1.4,0c0.4,0.4 0.4,1 0,1.4z"></path></g></g>
-                        </svg>
-                        </h2>
+                        <h2 class="card-title">${phero.title}</h2>
                         
                     </div>
+                    <div class="flex gap-2">
                     <p class="pl-10">${phero.authors[0].profile_name}</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0,0,256,256">
+                    <g fill="#5c7cfa" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(10.66667,10.66667)"><path d="M12,2c-5.5,0 -10,4.5 -10,10c0,5.5 4.5,10 10,10c5.5,0 10,-4.5 10,-10c0,-5.5 -4.5,-10 -10,-10zM17.7,9.7l-7,7c-0.2,0.2 -0.4,0.3 -0.7,0.3c-0.3,0 -0.5,-0.1 -0.7,-0.3l-3,-3c-0.4,-0.4 -0.4,-1 0,-1.4c0.4,-0.4 1,-0.4 1.4,0l2.3,2.3l6.3,-6.3c0.4,-0.4 1,-0.4 1.4,0c0.4,0.4 0.4,1 0,1.4z"></path></g></g>
+                    </svg>
+                    </div>
                     <p class="pl-10">${phero.others.views} views</p>
                 </div>`;
                 pheroContainer.appendChild(pheroCard);
@@ -74,7 +106,6 @@ const displayPheroes = pheroes =>{
     }
 }
 function handleDate(post_date){
-    console.log(post_date);
     if(post_date != ''){
         const postDate = parseFloat(post_date);
         const hours = Math.floor(postDate / 3600);
